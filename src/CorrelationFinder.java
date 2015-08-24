@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import sun.misc.Regexp;
+
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -59,13 +61,13 @@ public class CorrelationFinder {
       for(int i = 1; i < sheet.getRows(); i++){
     	  if(MAExam(sheet, column1, i)){
     		  Cell cell = sheet.getCell(COLAGE, i);
-    		  vector1.add(Double.parseDouble(cell.getContents()));
+    		  vector1.add(parseDouble(cell));
     	  }
       }
       for(int i = 1; i < sheet.getRows(); i++){
     	  if(MAExam(sheet, column2, i)){
     		  Cell cell = sheet.getCell(COLAGE, i);
-    		  vector2.add(Double.parseDouble(cell.getContents()));
+    		  vector2.add(parseDouble(cell));
     	  }
       }
       
@@ -80,13 +82,13 @@ public class CorrelationFinder {
       for(int i = 1; i < sheet.getRows(); i++){
     	  if(MAExam(sheet, column1, i)){
     		  Cell cell = sheet.getCell(COLHEIGHT, i);
-    		  vector1.add(Double.parseDouble(cell.getContents()));
+    		  vector1.add(parseDouble(cell));
     	  }
       }
       for(int i = 1; i < sheet.getRows(); i++){
     	  if(MAExam(sheet, column2, i)){
     		  Cell cell = sheet.getCell(COLHEIGHT, i);
-    		  vector2.add(Double.parseDouble(cell.getContents()));
+    		  vector2.add(parseDouble(cell));
     	  }
       }
       
@@ -101,13 +103,13 @@ public class CorrelationFinder {
       for(int i = 1; i < sheet.getRows(); i++){
     	  if(MAExam(sheet, column1, i)){
     		  Cell cell = sheet.getCell(COLWEIGHT, i);
-    		  vector1.add(Double.parseDouble(cell.getContents()));
+    		  vector1.add(parseDouble(cell));
     	  }
       }
       for(int i = 1; i < sheet.getRows(); i++){
     	  if(MAExam(sheet, column2, i)){
     		  Cell cell = sheet.getCell(COLWEIGHT, i);
-    		  vector2.add(Double.parseDouble(cell.getContents()));
+    		  vector2.add(parseDouble(cell));
     	  }
       }
       
@@ -127,6 +129,10 @@ public class CorrelationFinder {
       e.printStackTrace();
     }
   }
+
+private double parseDouble(Cell cell) {
+	return Double.parseDouble(cell.getContents().replace(",","."));
+}
   
   public void readForResult(String str1, String str2) throws IOException  {
 	    File inputWorkbook = new File(inputFile);
@@ -225,10 +231,10 @@ public class CorrelationFinder {
 	    	  if(MAExam(sheet, column1, i)){
 	    		  
 	    		  Cell cell2 = sheet.getCell(COLWEIGHT, i);
-	    		  double temp = Double.parseDouble(cell2.getContents());
+	    		  double temp = parseDouble(cell2);
 	    		  if(value-width <= temp && temp <= value+width){
 	    			  Cell cell = sheet.getCell(COLAGE, i);
-		    		  vector1.add(Double.parseDouble(cell.getContents()));
+		    		  vector1.add(parseDouble(cell));
 	    		  }
 
 	    	  }
@@ -237,10 +243,10 @@ public class CorrelationFinder {
 	    	  if(MAExam(sheet, column2, i)){
 	    		  
 	    		  Cell cell2 = sheet.getCell(COLWEIGHT, i);
-	    		  double temp = Double.parseDouble(cell2.getContents());
+	    		  double temp = parseDouble(cell2);
 	    		  if(value-width <= temp && temp <= value+width){
 	    			  Cell cell = sheet.getCell(COLAGE, i);
-		    		  vector2.add(Double.parseDouble(cell.getContents()));
+		    		  vector2.add(parseDouble(cell));
 	    		  }
 	    		  
 	    	  }
@@ -257,20 +263,20 @@ public class CorrelationFinder {
 	      for(int i = 1; i < sheet.getRows(); i++){
 	    	  if(MAExam(sheet, column1, i)){
 	    		  Cell cell2 = sheet.getCell(COLWEIGHT, i);
-	    		  double temp = Double.parseDouble(cell2.getContents());
+	    		  double temp = parseDouble(cell2);
 	    		  if(value-width <= temp && temp <= value+width){
 	    			  Cell cell = sheet.getCell(COLHEIGHT, i);
-		    		  vector1.add(Double.parseDouble(cell.getContents()));
+		    		  vector1.add(parseDouble(cell));
 	    		  }
 	    	  }
 	      }
 	      for(int i = 1; i < sheet.getRows(); i++){
 	    	  if(MAExam(sheet, column2, i)){
 	    		  Cell cell2 = sheet.getCell(COLWEIGHT, i);
-	    		  double temp = Double.parseDouble(cell2.getContents());
+	    		  double temp = parseDouble(cell2);
 	    		  if(value-width <= temp && temp <= value+width){
 	    			  Cell cell = sheet.getCell(COLHEIGHT, i);
-		    		  vector2.add(Double.parseDouble(cell.getContents()));
+		    		  vector2.add(parseDouble(cell));
 	    		  }
 	    	  }
 	      }
@@ -286,20 +292,20 @@ public class CorrelationFinder {
 	      for(int i = 1; i < sheet.getRows(); i++){
 	    	  if(MAExam(sheet, column1, i)){
 	    		  Cell cell2 = sheet.getCell(COLWEIGHT, i);
-	    		  double temp = Double.parseDouble(cell2.getContents());
+	    		  double temp = parseDouble(cell2);
 	    		  if(value-width <= temp && temp <= value+width){
 	    			  Cell cell = sheet.getCell(COLBLOODPRESSURE, i);
-		    		  vector1.add(Double.parseDouble(cell.getContents()));
+		    		  vector1.add(parseDouble(cell));
 	    		  }
 	    	  }
 	      }
 	      for(int i = 1; i < sheet.getRows(); i++){
 	    	  if(MAExam(sheet, column2, i)){
 	    		  Cell cell2 = sheet.getCell(COLWEIGHT, i);
-	    		  double temp = Double.parseDouble(cell2.getContents());
+	    		  double temp = parseDouble(cell2);
 	    		  if(value-width <= temp && temp <= value+width){
 	    			  Cell cell = sheet.getCell(COLBLOODPRESSURE, i);
-		    		  vector2.add(Double.parseDouble(cell.getContents()));
+		    		  vector2.add(parseDouble(cell));
 	    		  }
 	    	  }
 	      }

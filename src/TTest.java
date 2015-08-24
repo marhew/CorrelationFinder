@@ -53,8 +53,9 @@ public class TTest {
 
 		double d = tTest(sampleMP1, sampleMP2);
 		DecimalFormat df = new DecimalFormat("#.###");
-
-		if (Double.parseDouble(df.format(d)) < 0.05) {
+		
+//		if (Double.parseDouble(df.format(d)) < 0.05) {
+		if (d < 0.05) {
 			returnList.add(1.0);
 			returnList.add(mean1);
 			returnList.add(mean2);
